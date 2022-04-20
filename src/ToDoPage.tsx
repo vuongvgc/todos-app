@@ -48,7 +48,6 @@ const ToDoPage = () => {
   const onDeleteTodo = (todoId: string) => {
     dispatch(deleteTodo(todoId));
   };
-  console.log("todo", todos);
   return (
     <div className="ToDo__container">
       <div className="Todo__creation">
@@ -102,17 +101,24 @@ const ToDoPage = () => {
           <div />
         )}
         <div className="Todo__tabs">
-          <button className="Action__btn" onClick={() => setShowing("ALL")}>
+          <button
+            className={`Action__btn ${showing === "ALL" && "active"}`}
+            onClick={() => setShowing("ALL")}
+          >
             All
           </button>
           <button
-            className="Action__btn"
+            className={`Action__btn ${
+              showing === TodoStatus.ACTIVE && "active"
+            }`}
             onClick={() => setShowing(TodoStatus.ACTIVE)}
           >
             Active
           </button>
           <button
-            className="Action__btn"
+            className={`Action__btn ${
+              showing === TodoStatus.COMPLETED && "active"
+            }`}
             onClick={() => setShowing(TodoStatus.COMPLETED)}
           >
             Completed
