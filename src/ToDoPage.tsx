@@ -46,6 +46,7 @@ const ToDoPage = () => {
   const onDeleteAllTodo = () => {
     dispatch(deleteAllTodos());
   };
+
   const onDeleteTodo = (todoId: string) => {
     dispatch(deleteTodo(todoId));
   };
@@ -62,27 +63,35 @@ const ToDoPage = () => {
         />
       </div>
       <div className="ToDo__list">
-        {todos.map((todo, index) => {
-          return (
-            //   Không sử dụng index để làm key của item khi render một list
-            <div key={todo.id} className="ToDo__item">
-              <input
-                aria-label="todo-checkbox"
-                type="checkbox"
-                checked={TodoStatus.COMPLETED === todo.status}
-                onChange={(e) => onUpdateTodoStatus(e, todo.id)}
-                placeholder="checkbox"
-              />
-              <span>{todo.content}</span>
-              <button
-                className="Todo__delete"
-                onClick={() => onDeleteTodo(todo.id)}
-              >
-                X
-              </button>
-            </div>
-          );
-        })}
+        {todos
+          .filter((todo) => {
+            if (showing === "ALL") {
+              return true;
+            } else {
+              return showing === todo.status;
+            }
+          })
+          .map((todo, index) => {
+            return (
+              //   Không sử dụng index để làm key của item khi render một list
+              <div key={todo.id} className="ToDo__item">
+                <input
+                  aria-label="todo-checkbox"
+                  type="checkbox"
+                  checked={TodoStatus.COMPLETED === todo.status}
+                  onChange={(e) => onUpdateTodoStatus(e, todo.id)}
+                  placeholder="checkbox"
+                />
+                <span>{todo.content}</span>
+                <button
+                  className="Todo__delete"
+                  onClick={() => onDeleteTodo(todo.id)}
+                >
+                  X
+                </button>
+              </div>
+            );
+          })}
       </div>
       <div className="Todo__toolbar">
         {todos.length > 0 ? (
@@ -95,7 +104,9 @@ const ToDoPage = () => {
           <div />
         )}
         <div className="Todo__tabs">
-          <button className="Action__btn">All</button>
+          <button className="Action__btn" onClick={() => setShowing("ALL")}>
+            All
+          </button>
           <button
             className="Action__btn"
             onClick={() => setShowing(TodoStatus.ACTIVE)}
