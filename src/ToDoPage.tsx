@@ -3,7 +3,7 @@ import React, { useEffect, useReducer, useRef, useState } from 'react';
 import { TodoStatus } from './models/todo';
 import Service from './service';
 import {
-    createTodo, deleteAllTodos, setTodos, toggleAllTodos, updateTodoStatus
+    createTodo, deleteAllTodos, deleteTodo, setTodos, toggleAllTodos, updateTodoStatus
 } from './store/actions';
 import reducer, { initialState } from './store/reducer';
 
@@ -46,6 +46,9 @@ const ToDoPage = () => {
   const onDeleteAllTodo = () => {
     dispatch(deleteAllTodos());
   };
+  const onDeleteTodo = (todoId: string) => {
+    dispatch(deleteTodo(todoId));
+  };
 
   return (
     <div className="ToDo__container">
@@ -71,7 +74,12 @@ const ToDoPage = () => {
                 placeholder="checkbox"
               />
               <span>{todo.content}</span>
-              <button className="Todo__delete">X</button>
+              <button
+                className="Todo__delete"
+                onClick={() => onDeleteTodo(todo.id)}
+              >
+                X
+              </button>
             </div>
           );
         })}
