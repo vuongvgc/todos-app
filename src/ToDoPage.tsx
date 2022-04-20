@@ -25,7 +25,6 @@ const ToDoPage = () => {
   const onCreateTodo = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       const resp = await Service.createTodo(inputRef.current.value);
-      console.debug("resp", resp);
       dispatch(createTodo(resp));
       inputRef.current.value = "";
     }
@@ -35,7 +34,6 @@ const ToDoPage = () => {
     e: React.ChangeEvent<HTMLInputElement>,
     todoId: string
   ) => {
-    console.debug("run click");
     dispatch(updateTodoStatus(todoId, e.target.checked));
   };
 
@@ -50,7 +48,7 @@ const ToDoPage = () => {
   const onDeleteTodo = (todoId: string) => {
     dispatch(deleteTodo(todoId));
   };
-
+  console.log("todo", todos);
   return (
     <div className="ToDo__container">
       <div className="Todo__creation">
