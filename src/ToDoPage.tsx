@@ -33,8 +33,9 @@ const ToDoPage = () => {
 
   const onUpdateTodoStatus = (
     e: React.ChangeEvent<HTMLInputElement>,
-    todoId: any
+    todoId: string
   ) => {
+    console.debug("run click");
     dispatch(updateTodoStatus(todoId, e.target.checked));
   };
 
@@ -60,12 +61,13 @@ const ToDoPage = () => {
       <div className="ToDo__list">
         {todos.map((todo, index) => {
           return (
-            <div key={index} className="ToDo__item">
+            //   Không sử dụng index để làm key của item khi render một list
+            <div key={todo.id} className="ToDo__item">
               <input
                 aria-label="todo-checkbox"
                 type="checkbox"
-                checked={showing === todo.status}
-                onChange={(e) => onUpdateTodoStatus(e, index)}
+                checked={TodoStatus.COMPLETED === todo.status}
+                onChange={(e) => onUpdateTodoStatus(e, todo.id)}
                 placeholder="checkbox"
               />
               <span>{todo.content}</span>

@@ -21,6 +21,7 @@ function reducer(state: AppState, action: AppActions): AppState {
       };
 
     case UPDATE_TODO_STATUS:
+      console.debug("run ", state, action.payload.todoId);
       const index2 = state.todos.findIndex(
         (todo) => todo.id === action.payload.todoId
       );
