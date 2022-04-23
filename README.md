@@ -15,13 +15,17 @@ I add some features to the application:
 - Display number of todo related status
 - Clear all todos
 - Check all todos
+- Modal confirm delete
 - Add logo for website
+- Style website
 
 #### Features will develop in the future
 - Add interface for todo
-- Add unit for project
+- Add unitTest for project
 - Build API
 - Feature auth
+- Can drag and drop todos
+- Add more information of todo such: date, todo title, todo content, categories...
 
 *Thank you so much and I hope receive feedback from company*
 ## Welcome to Manabie coding challenge
