@@ -24,15 +24,15 @@ const Modal: React.FC<IModal> = (props) => {
         <span className="close" onClick={handleCancel}>
           &times;
         </span>
-        <h3>Xóa todos</h3>
-        <p>
-          Bạn có muốn xóa tất cả todos. Todos bị xóa sẽ không thể không phục
+        <h3 className="modal-title">Delete todos</h3>
+        <p className="modal-content-detail">
+          Do you want to delete all todos. Deleted to-dos cannot be recovered
         </p>
         <div className="todo-delete-box">
           <button className="button-accept" onClick={handleOk}>
-            Chấp nhận
+            Accept
           </button>
-          <button onClick={handleCancel}>Hủy bỏ</button>
+          <button onClick={handleCancel}>Cancel</button>
         </div>
       </div>
     </div>

@@ -26,6 +26,11 @@
     max-width: 300px;
     border-radius: 8px;
 }
+.modal-title {
+  color: darkslategray;
+  text-transform: capitalize ;
+  letter-spacing: 1px;
+}
   
   /* The Close Button */
 .close {
@@ -45,6 +50,8 @@
     justify-content: space-around;
     align-items: center;
 }
+
 .button-accept {
-    background: pink;
+  background: darkslategray;
+  color: white;
 }
