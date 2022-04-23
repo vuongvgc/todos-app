@@ -9,11 +9,11 @@ import {
 } from './store/actions';
 import reducer, { initialState } from './store/reducer';
 
-type EnhanceTodoStatus = TodoStatus | "ALL";
+type EnhanceTodoStatus = TodoStatus;
 
 const ToDoPage = () => {
   const [{ todos }, dispatch] = useReducer(reducer, initialState);
-  const [showing, setShowing] = useState<EnhanceTodoStatus>("ALL");
+  const [showing, setShowing] = useState<EnhanceTodoStatus>(TodoStatus.ALL);
   const inputRef = useRef<any>(null);
   const inputRefUpdateContent = useRef<any>(null);
 
@@ -81,7 +81,7 @@ const ToDoPage = () => {
       <div className="ToDo__list">
         {todos
           .filter((todo) => {
-            if (showing === "ALL") {
+            if (showing === TodoStatus.ALL) {
               return true;
             } else {
               return showing === todo.status;
@@ -141,8 +141,8 @@ const ToDoPage = () => {
         )}
         <div className="Todo__tabs">
           <button
-            className={`Action__btn ${showing === "ALL" && "active"}`}
-            onClick={() => setShowing("ALL")}
+            className={`Action__btn ${showing === TodoStatus.ALL && "active"}`}
+            onClick={() => setShowing(TodoStatus.ALL)}
           >
             All ({todos.length})
           </button>
