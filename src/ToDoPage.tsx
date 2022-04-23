@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 
+import Modal from './components/Modal';
 import { useOutsideItem } from './hook/useOutsideItem';
 import { TodoFilter, TodoStatus } from './models/todo';
 import Service from './service';
@@ -16,7 +17,7 @@ const ToDoPage = () => {
   const [showing, setShowing] = useState<EnhanceTodoStatus>(TodoFilter.ALL);
   const inputRef = useRef<any>(null);
   const inputRefUpdateContent = useRef<any>(null);
-
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   const [valueInput, setValueInput] = useState<string>("");
   useEffect(() => {
     (async () => {
@@ -169,10 +170,15 @@ const ToDoPage = () => {
             )
           </button>
         </div>
-        <button className="Action__btn" onClick={onDeleteAllTodo}>
+        <button className="Action__btn" onClick={() => setIsVisible(true)}>
           Clear all todos
         </button>
       </div>
+      <Modal
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
+        onOk={onDeleteAllTodo}
+      />
     </div>
   );
 };
