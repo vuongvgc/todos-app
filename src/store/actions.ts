@@ -100,7 +100,7 @@ export interface UpdateTodoContentAction {
   };
 }
 
-export function updateTodoUpdateTodoContentAction(
+export function updateTodoUpdateTodoContent(
   todoId: string,
   content: string
 ): UpdateTodoContentAction {
@@ -117,14 +117,19 @@ export interface UpdateTodoToggleAction {
   type: typeof UPDATE_TODO_TOGGLE;
   payload: {
     todoId: string;
+    toggle: boolean;
   };
 }
 
-export function updateTodoToggle(todoId: string): UpdateTodoToggleAction {
+export function updateTodoToggle(
+  todoId: string,
+  toggle: boolean
+): UpdateTodoToggleAction {
   return {
     type: UPDATE_TODO_TOGGLE,
     payload: {
       todoId,
+      toggle,
     },
   };
 }

@@ -118,10 +118,13 @@ function reducer(state: AppState, action: AppActions): AppState {
       };
 
     case UPDATE_TODO_TOGGLE:
-      const index4 = state.todos.findIndex(
-        (todo) => todo.id === action.payload.todoId
-      );
-      state.todos[index4].toggle = !state.todos[index4].toggle;
+      state.todos.forEach((todo) => {
+        if (todo.id === action.payload.todoId) {
+          todo.toggle = action.payload.toggle;
+        } else {
+          todo.toggle = true;
+        }
+      });
       return {
         ...state,
         todos: state.todos,

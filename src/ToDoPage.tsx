@@ -4,7 +4,7 @@ import { TodoStatus } from './models/todo';
 import Service from './service';
 import {
     createTodo, deleteAllTodos, deleteTodo, setTodos, toggleAllTodos, updateTodoStatus,
-    updateTodoToggle, updateTodoUpdateTodoContentAction
+    updateTodoToggle, updateTodoUpdateTodoContent
 } from './store/actions';
 import reducer, { initialState } from './store/reducer';
 
@@ -35,9 +35,9 @@ const ToDoPage = () => {
     e: React.KeyboardEvent<HTMLInputElement>,
     todoId: string
   ) => {
-    console.debug("e", e.key);
     if (e.key === "Enter") {
-      dispatch(updateTodoUpdateTodoContentAction(todoId, valueInput));
+      dispatch(updateTodoUpdateTodoContent(todoId, valueInput));
+      dispatch(updateTodoToggle(todoId, true));
       setValueInput("");
     }
   };
@@ -95,7 +95,8 @@ const ToDoPage = () => {
                 {todo.toggle ? (
                   <span
                     onDoubleClick={() => {
-                      dispatch(updateTodoToggle(todo.id));
+                      console.debug("run");
+                      dispatch(updateTodoToggle(todo.id, false));
                       setValueInput(todo.content);
                     }}
                   >
