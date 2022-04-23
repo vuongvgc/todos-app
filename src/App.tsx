@@ -3,12 +3,12 @@ import './App.css';
 import React, { useState } from 'react';
 
 import ChangeLanguage from './components/ChangeLanguage';
-import { language, LanguageContext } from './Context';
+import { defaultLanguage, LanguageContext } from './Context';
 import { dataLanguage } from './language';
 import ToDoPage from './ToDoPage';
 
 function App() {
-  const [languageAction, setLanguageActive] = useState<string>(language.VI);
+  const [languageAction, setLanguageActive] = useState<string>(defaultLanguage);
   const toggleTheme = (lang: string) => {
     setLanguageActive(lang);
   };

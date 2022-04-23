@@ -2,17 +2,17 @@ import { createContext } from 'react';
 
 import { dataLanguage } from '../language';
 
-export const language: {
-  [key: string]: string;
-} = {
-  VI: "vi",
-  EN: "en",
-};
+export const defaultLanguage = "vi";
+export const languageList = [
+  { short: "vi", full: "VietNam" },
+  { short: "en", full: "English" },
+  { short: "jp", full: "Japan" },
+];
 
 export const defaultContext: {
   [key: string]: number | string | any;
 } = {
-  selectLanguage: language.VI,
+  selectLanguage: defaultLanguage,
   dataLanguage,
   toggleLanguage: () => {},
 };

@@ -23,4 +23,16 @@ export const dataLanguage = {
     buttonAccept: "Accept",
     buttonCancel: "Cancel",
   },
+  jp: {
+    filterAll: "すべて",
+    active: "アクティブ",
+    completed: "完了",
+    clearAll: "すべてクリア",
+    inputTodo: "何をする必要がありますか？",
+    modalTitle: "すべて削除",
+    modalContent:
+      "必ずtodoを削除してください。削除されたミッションは復元されません。",
+    buttonAccept: "受け入れる",
+    buttonCancel: "キャンセル",
+  },
 };
