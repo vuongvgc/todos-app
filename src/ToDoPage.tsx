@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 
+import Loader from './components/Loader';
 import Modal from './components/Modal';
 import { useOutsideItem } from './hook/useOutsideItem';
 import { TodoFilter, TodoStatus } from './models/todo';
@@ -22,7 +23,6 @@ const ToDoPage = () => {
   useEffect(() => {
     (async () => {
       const resp = await Service.getTodos();
-
       dispatch(setTodos(resp || []));
     })();
   }, []);
@@ -80,56 +80,60 @@ const ToDoPage = () => {
         />
       </div>
       <div className="ToDo__list">
-        {todos
-          .filter((todo) => {
-            if (showing === TodoFilter.ALL) {
-              return true;
-            } else {
-              return showing === todo.status;
-            }
-          })
-          .map((todo, index) => {
-            return (
-              //   Không sử dụng index để làm key của item khi render một list
-              <div key={todo.id} className="ToDo__item">
-                <input
-                  aria-label="todo-checkbox"
-                  type="checkbox"
-                  checked={TodoStatus.COMPLETED === todo.status}
-                  onChange={(e) => onUpdateTodoStatus(e, todo.id)}
-                  placeholder="checkbox"
-                />
-
-                {todo.toggle ? (
-                  <span
-                    onDoubleClick={() => {
-                      dispatch(updateTodoToggle(todo.id, false));
-                      setValueInput(todo.content);
-                    }}
-                  >
-                    {todo.content}
-                  </span>
-                ) : (
+        {todos ? (
+          todos
+            .filter((todo) => {
+              if (showing === TodoFilter.ALL) {
+                return true;
+              } else {
+                return showing === todo.status;
+              }
+            })
+            .map((todo, index) => {
+              return (
+                //   Không sử dụng index để làm key của item khi render một list
+                <div key={todo.id} className="ToDo__item">
                   <input
-                    ref={inputRefUpdateContent}
-                    aria-label="todo-content"
-                    type="text"
-                    id={todo.id}
-                    className="todo-input-content"
-                    value={valueInput}
-                    onKeyPress={(e) => onUpdateTodoContent(e, todo.id)}
-                    onChange={(e) => setValueInput(e.target.value)}
+                    aria-label="todo-checkbox"
+                    type="checkbox"
+                    checked={TodoStatus.COMPLETED === todo.status}
+                    onChange={(e) => onUpdateTodoStatus(e, todo.id)}
+                    placeholder="checkbox"
                   />
-                )}
-                <button
-                  className="Todo__delete"
-                  onClick={() => onDeleteTodo(todo.id)}
-                >
-                  X
-                </button>
-              </div>
-            );
-          })}
+
+                  {todo.toggle ? (
+                    <span
+                      onDoubleClick={() => {
+                        dispatch(updateTodoToggle(todo.id, false));
+                        setValueInput(todo.content);
+                      }}
+                    >
+                      {todo.content}
+                    </span>
+                  ) : (
+                    <input
+                      ref={inputRefUpdateContent}
+                      aria-label="todo-content"
+                      type="text"
+                      id={todo.id}
+                      className="todo-input-content"
+                      value={valueInput}
+                      onKeyPress={(e) => onUpdateTodoContent(e, todo.id)}
+                      onChange={(e) => setValueInput(e.target.value)}
+                    />
+                  )}
+                  <button
+                    className="Todo__delete"
+                    onClick={() => onDeleteTodo(todo.id)}
+                  >
+                    X
+                  </button>
+                </div>
+              );
+            })
+        ) : (
+          <Loader />
+        )}
       </div>
       <div className="Todo__toolbar">
         {todos.length > 0 ? (
