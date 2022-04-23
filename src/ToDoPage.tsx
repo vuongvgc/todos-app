@@ -3,7 +3,7 @@ import React, { useEffect, useReducer, useRef, useState } from 'react';
 import Loader from './components/Loader';
 import Modal from './components/Modal';
 import TodoTabs from './components/TodoTabs';
-import { useLanguageContext } from './Context';
+import { useLanguageContext } from './hook/useLanguageContext';
 import { useOutsideItem } from './hook/useOutsideItem';
 import { TodoFilter, TodoStatus } from './models/todo';
 import Service from './service';

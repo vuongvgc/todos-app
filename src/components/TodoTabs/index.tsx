@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useLanguageContext } from '../../Context';
+import { useLanguageContext } from '../../hook/useLanguageContext';
 import { TodoFilter, TodoStatus } from '../../models/todo';
 import { EnhanceTodoStatus } from '../../ToDoPage';
 

@@ -2,7 +2,8 @@ import './styles.css';
 
 import React from 'react';
 
-import { language, useLanguageContext } from '../../Context';
+import { language } from '../../Context';
+import { useLanguageContext } from '../../hook/useLanguageContext';
 
 const ChangeLanguage = () => {
   const { toggleLanguage, selectLanguage } = useLanguageContext();

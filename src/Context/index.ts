@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext } from 'react';
 
 import { dataLanguage } from '../language';
 
@@ -17,7 +17,3 @@ export const defaultContext: {
   toggleLanguage: () => {},
 };
 export const LanguageContext = createContext(defaultContext);
-
-export function useLanguageContext() {
-  return useContext(LanguageContext);
-}

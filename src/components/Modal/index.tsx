@@ -2,7 +2,7 @@ import './styles.css';
 
 import React from 'react';
 
-import { useLanguageContext } from '../../Context';
+import { useLanguageContext } from '../../hook/useLanguageContext';
 
 interface IModal {
   isVisible: boolean;
