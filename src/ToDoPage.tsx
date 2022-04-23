@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 
 import { useOutsideItem } from './hook/useOutsideItem';
-import { TodoStatus } from './models/todo';
+import { TodoFilter, TodoStatus } from './models/todo';
 import Service from './service';
 import {
     createTodo, deleteAllTodos, deleteTodo, setTodos, toggleAllTodos, updateTodoStatus,
@@ -9,11 +9,11 @@ import {
 } from './store/actions';
 import reducer, { initialState } from './store/reducer';
 
-type EnhanceTodoStatus = TodoStatus;
+type EnhanceTodoStatus = TodoStatus | TodoFilter.ALL;
 
 const ToDoPage = () => {
   const [{ todos }, dispatch] = useReducer(reducer, initialState);
-  const [showing, setShowing] = useState<EnhanceTodoStatus>(TodoStatus.ALL);
+  const [showing, setShowing] = useState<EnhanceTodoStatus>(TodoFilter.ALL);
   const inputRef = useRef<any>(null);
   const inputRefUpdateContent = useRef<any>(null);
 
@@ -81,7 +81,7 @@ const ToDoPage = () => {
       <div className="ToDo__list">
         {todos
           .filter((todo) => {
-            if (showing === TodoStatus.ALL) {
+            if (showing === TodoFilter.ALL) {
               return true;
             } else {
               return showing === todo.status;
@@ -141,8 +141,8 @@ const ToDoPage = () => {
         )}
         <div className="Todo__tabs">
           <button
-            className={`Action__btn ${showing === TodoStatus.ALL && "active"}`}
-            onClick={() => setShowing(TodoStatus.ALL)}
+            className={`Action__btn ${showing === TodoFilter.ALL && "active"}`}
+            onClick={() => setShowing(TodoFilter.ALL)}
           >
             All ({todos.length})
           </button>
