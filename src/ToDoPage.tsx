@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 
+import { useOutsideItem } from './hook/useOutsideItem';
 import { TodoStatus } from './models/todo';
 import Service from './service';
 import {
@@ -63,24 +64,9 @@ const ToDoPage = () => {
     dispatch(deleteTodo(todoId));
   };
 
-  const useOutsideAlerter = (ref: any) => {
-    useEffect(() => {
-      function handleClickOutside(event: { target: any }) {
-        if (
-          ref.current &&
-          !ref.current.contains(event.target) &&
-          ref.current.id
-        ) {
-          dispatch(updateTodoToggle(ref.current.id, true));
-        }
-      }
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [ref]);
-  };
-  useOutsideAlerter(inputRefUpdateContent);
+  useOutsideItem(inputRefUpdateContent, () =>
+    dispatch(updateTodoToggle(inputRefUpdateContent.current.id, true))
+  );
   return (
     <div className="ToDo__container">
       <div className="Todo__creation">
