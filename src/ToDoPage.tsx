@@ -99,6 +99,7 @@ const ToDoPage = () => {
                   onChange={(e) => onUpdateTodoStatus(e, todo.id)}
                   placeholder="checkbox"
                 />
+
                 {todo.toggle ? (
                   <span
                     onDoubleClick={() => {

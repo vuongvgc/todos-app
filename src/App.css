@@ -110,6 +110,9 @@ input:focus {
   text-align: left;
   margin-left: 8px;
   text-transform: capitalize;
+  overflow: hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
 }
 .ToDo__item > .todo-input-content {
  width: 80%;
