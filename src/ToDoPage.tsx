@@ -115,7 +115,6 @@ const ToDoPage = () => {
                 {todo.toggle ? (
                   <span
                     onDoubleClick={() => {
-                      console.debug("run");
                       dispatch(updateTodoToggle(todo.id, false));
                       setValueInput(todo.content);
                     }}
