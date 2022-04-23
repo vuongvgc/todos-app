@@ -18,6 +18,8 @@ I add some features to the application:
 - Modal confirm delete
 - Add logo for website
 - Style website
+- Add multi language
+- Add loading 
 
 #### Features will develop in the future
 - Add interface for todo
