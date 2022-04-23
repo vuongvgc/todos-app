@@ -167,9 +167,7 @@ const ToDoPage = () => {
             onClick={() => setShowing(TodoStatus.ACTIVE)}
           >
             Active (
-            {todos.filter((todo) => todo.status === TodoStatus.ACTIVE).length ||
-              0}
-            )
+            {todos.filter((todo) => todo.status === TodoStatus.ACTIVE).length})
           </button>
           <button
             className={`Action__btn ${
@@ -178,8 +176,10 @@ const ToDoPage = () => {
             onClick={() => setShowing(TodoStatus.COMPLETED)}
           >
             Completed (
-            {todos.filter((todo) => todo.status === TodoStatus.COMPLETED)
-              .length || 0}
+            {
+              todos.filter((todo) => todo.status === TodoStatus.COMPLETED)
+                .length
+            }
             )
           </button>
         </div>
