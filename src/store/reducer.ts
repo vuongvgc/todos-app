@@ -1,8 +1,9 @@
 import { Todo, TodoStatus } from '../models/todo';
+import { AppActions } from './actions';
 import {
-    AppActions, CREATE_TODO, DELETE_ALL_TODOS, DELETE_TODO, TOGGLE_ALL_TODOS, UPDATE_TODO_CONTENT,
+    CREATE_TODO, DELETE_ALL_TODOS, DELETE_TODO, TOGGLE_ALL_TODOS, UPDATE_TODO_CONTENT,
     UPDATE_TODO_STATUS, UPDATE_TODO_TOGGLE
-} from './actions';
+} from './constants';
 
 export interface AppState {
   todos: Array<Todo>;
