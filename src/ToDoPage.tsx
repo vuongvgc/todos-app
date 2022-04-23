@@ -14,6 +14,8 @@ const ToDoPage = () => {
   const [{ todos }, dispatch] = useReducer(reducer, initialState);
   const [showing, setShowing] = useState<EnhanceTodoStatus>("ALL");
   const inputRef = useRef<any>(null);
+  const inputRefUpdateContent = useRef<any>(null);
+
   const [valueInput, setValueInput] = useState<string>("");
   useEffect(() => {
     (async () => {
@@ -61,6 +63,24 @@ const ToDoPage = () => {
     dispatch(deleteTodo(todoId));
   };
 
+  const useOutsideAlerter = (ref: any) => {
+    useEffect(() => {
+      function handleClickOutside(event: { target: any }) {
+        if (
+          ref.current &&
+          !ref.current.contains(event.target) &&
+          ref.current.id
+        ) {
+          dispatch(updateTodoToggle(ref.current.id, true));
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  };
+  useOutsideAlerter(inputRefUpdateContent);
   return (
     <div className="ToDo__container">
       <div className="Todo__creation">
@@ -104,8 +124,10 @@ const ToDoPage = () => {
                   </span>
                 ) : (
                   <input
+                    ref={inputRefUpdateContent}
                     aria-label="todo-content"
                     type="text"
+                    id={todo.id}
                     className="todo-input-content"
                     value={valueInput}
                     onKeyPress={(e) => onUpdateTodoContent(e, todo.id)}
