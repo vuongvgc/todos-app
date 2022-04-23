@@ -1,6 +1,7 @@
 import { Todo, TodoStatus } from '../models/todo';
 import {
-    AppActions, CREATE_TODO, DELETE_ALL_TODOS, DELETE_TODO, TOGGLE_ALL_TODOS, UPDATE_TODO_STATUS
+    AppActions, CREATE_TODO, DELETE_ALL_TODOS, DELETE_TODO, TOGGLE_ALL_TODOS, UPDATE_TODO_CONTENT,
+    UPDATE_TODO_STATUS, UPDATE_TODO_TOGGLE
 } from './actions';
 
 export interface AppState {
@@ -41,6 +42,24 @@ function reducer(state: AppState, action: AppActions): AppState {
       state.todos[index2].status = action.payload.checked
         ? TodoStatus.COMPLETED
         : TodoStatus.ACTIVE;
+      window.localStorage.setItem(
+        "todos-app",
+        JSON.stringify({
+          ...state,
+          todos: state.todos,
+        })
+      );
+      return {
+        ...state,
+        todos: state.todos,
+      };
+
+    case UPDATE_TODO_CONTENT:
+      const index3 = state.todos.findIndex(
+        (todo) => todo.id === action.payload.todoId
+      );
+      state.todos[index3].content = action.payload.content;
+      state.todos[index3].toggle = true;
       window.localStorage.setItem(
         "todos-app",
         JSON.stringify({
@@ -98,6 +117,15 @@ function reducer(state: AppState, action: AppActions): AppState {
         todos: [],
       };
 
+    case UPDATE_TODO_TOGGLE:
+      const index4 = state.todos.findIndex(
+        (todo) => todo.id === action.payload.todoId
+      );
+      state.todos[index4].toggle = !state.todos[index4].toggle;
+      return {
+        ...state,
+        todos: state.todos,
+      };
     default:
       return state;
   }

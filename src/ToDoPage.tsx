@@ -3,7 +3,8 @@ import React, { useEffect, useReducer, useRef, useState } from 'react';
 import { TodoStatus } from './models/todo';
 import Service from './service';
 import {
-    createTodo, deleteAllTodos, deleteTodo, setTodos, toggleAllTodos, updateTodoStatus
+    createTodo, deleteAllTodos, deleteTodo, setTodos, toggleAllTodos, updateTodoStatus,
+    updateTodoToggle, updateTodoUpdateTodoContentAction
 } from './store/actions';
 import reducer, { initialState } from './store/reducer';
 
@@ -13,7 +14,7 @@ const ToDoPage = () => {
   const [{ todos }, dispatch] = useReducer(reducer, initialState);
   const [showing, setShowing] = useState<EnhanceTodoStatus>("ALL");
   const inputRef = useRef<any>(null);
-
+  const [valueInput, setValueInput] = useState<string>("");
   useEffect(() => {
     (async () => {
       const resp = await Service.getTodos();
@@ -27,6 +28,17 @@ const ToDoPage = () => {
       const resp = await Service.createTodo(inputRef.current.value);
       dispatch(createTodo(resp));
       inputRef.current.value = "";
+    }
+  };
+
+  const onUpdateTodoContent = async (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    todoId: string
+  ) => {
+    console.debug("e", e.key);
+    if (e.key === "Enter") {
+      dispatch(updateTodoUpdateTodoContentAction(todoId, valueInput));
+      setValueInput("");
     }
   };
 
@@ -48,6 +60,7 @@ const ToDoPage = () => {
   const onDeleteTodo = (todoId: string) => {
     dispatch(deleteTodo(todoId));
   };
+
   return (
     <div className="ToDo__container">
       <div className="Todo__creation">
@@ -79,7 +92,25 @@ const ToDoPage = () => {
                   onChange={(e) => onUpdateTodoStatus(e, todo.id)}
                   placeholder="checkbox"
                 />
-                <span>{todo.content}</span>
+                {todo.toggle ? (
+                  <span
+                    onDoubleClick={() => {
+                      dispatch(updateTodoToggle(todo.id));
+                      setValueInput(todo.content);
+                    }}
+                  >
+                    {todo.content}
+                  </span>
+                ) : (
+                  <input
+                    aria-label="todo-content"
+                    type="text"
+                    className="todo-input-content"
+                    value={valueInput}
+                    onKeyPress={(e) => onUpdateTodoContent(e, todo.id)}
+                    onChange={(e) => setValueInput(e.target.value)}
+                  />
+                )}
                 <button
                   className="Todo__delete"
                   onClick={() => onDeleteTodo(todo.id)}

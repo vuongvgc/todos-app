@@ -93,6 +93,9 @@ input:focus {
   margin-left: 8px;
   text-transform: capitalize;
 }
+.ToDo__item > .todo-input-content {
+ width: 80%;
+}
 
 .Todo__content {
   flex: 1 1;
