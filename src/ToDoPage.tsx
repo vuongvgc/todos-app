@@ -2,6 +2,8 @@ import React, { useEffect, useReducer, useRef, useState } from 'react';
 
 import Loader from './components/Loader';
 import Modal from './components/Modal';
+import TodoTabs from './components/TodoTabs';
+import { useLanguageContext } from './Context';
 import { useOutsideItem } from './hook/useOutsideItem';
 import { TodoFilter, TodoStatus } from './models/todo';
 import Service from './service';
@@ -11,9 +13,11 @@ import {
 } from './store/actions';
 import reducer, { initialState } from './store/reducer';
 
-type EnhanceTodoStatus = TodoStatus | TodoFilter.ALL;
+export type EnhanceTodoStatus = TodoStatus | TodoFilter.ALL;
 
 const ToDoPage = () => {
+  const { dataLanguage, selectLanguage } = useLanguageContext();
+  const language = dataLanguage[selectLanguage];
   const [{ todos }, dispatch] = useReducer(reducer, initialState);
   const [showing, setShowing] = useState<EnhanceTodoStatus>(TodoFilter.ALL);
   const inputRef = useRef<any>(null);
@@ -75,7 +79,7 @@ const ToDoPage = () => {
           aria-label="todo-input"
           ref={inputRef}
           className="Todo__input"
-          placeholder="What need to be done?"
+          placeholder={language.inputTodo}
           onKeyDown={onCreateTodo}
         />
       </div>
@@ -145,38 +149,9 @@ const ToDoPage = () => {
         ) : (
           <div />
         )}
-        <div className="Todo__tabs">
-          <button
-            className={`Action__btn ${showing === TodoFilter.ALL && "active"}`}
-            onClick={() => setShowing(TodoFilter.ALL)}
-          >
-            All ({todos.length})
-          </button>
-          <button
-            className={`Action__btn ${
-              showing === TodoStatus.ACTIVE && "active"
-            }`}
-            onClick={() => setShowing(TodoStatus.ACTIVE)}
-          >
-            Active (
-            {todos.filter((todo) => todo.status === TodoStatus.ACTIVE).length})
-          </button>
-          <button
-            className={`Action__btn ${
-              showing === TodoStatus.COMPLETED && "active"
-            }`}
-            onClick={() => setShowing(TodoStatus.COMPLETED)}
-          >
-            Completed (
-            {
-              todos.filter((todo) => todo.status === TodoStatus.COMPLETED)
-                .length
-            }
-            )
-          </button>
-        </div>
+        <TodoTabs showing={showing} setShowing={setShowing} todos={todos} />
         <button className="Action__btn" onClick={() => setIsVisible(true)}>
-          Clear all todos
+          {language.clearAll}
         </button>
       </div>
       <Modal
