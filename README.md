@@ -1,3 +1,29 @@
+## answer coding challenge:
+*Candidate: Do Minh Vuong*
+*Position: Junior Frontend Developer*
+*Time: start test from 20/4/2022 to 20/5/2022*
+#### Common (required for both positions)
+-  Render TodoList: Do not use the index as the key of the item when render a list todo. Use todoId for key. 
+-  Reducer: store is Immutable . Do not modify store. Have to copy and reassign the store
+#### Front-end engineer
+I add some features to the application:
+- User localStorage to save todos List. Hold todos list when reload page. Increase UX
+- Edit todo by double click todos. Enter for update todo.
+- Cancel edit todo by click outside todo.
+- Set Status of todos. 
+- Filter Status todos
+- Display number of todo related status
+- Clear all todos
+- Check all todos
+- Add logo for website
+
+#### Features will develop in the future
+- Add interface for todo
+- Add unit for project
+- Build API
+- Feature auth
+
+*Thank you so much and I hope receive feedback from company*
 ## Welcome to Manabie coding challenge
 
 *Hello!*
