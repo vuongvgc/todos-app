@@ -8,8 +8,9 @@ import { dataLanguage } from './language';
 import ToDoPage from './ToDoPage';
 
 function App() {
-  const [languageAction, setLanguageActive] = useState<string>(defaultLanguage);
-  const toggleTheme = (lang: string) => {
+  const [languageAction, setLanguageActive] =
+    useState<keyof typeof dataLanguage>(defaultLanguage);
+  const toggleTheme = (lang: keyof typeof dataLanguage) => {
     setLanguageActive(lang);
   };
   return (
@@ -17,7 +18,7 @@ function App() {
       value={{
         selectLanguage: languageAction,
         dataLanguage: dataLanguage,
-        toggleLanguage: (lang: string) => toggleTheme(lang),
+        toggleLanguage: (lang: keyof typeof dataLanguage) => toggleTheme(lang),
       }}
     >
       <main className="App">
