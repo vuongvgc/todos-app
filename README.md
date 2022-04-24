@@ -5,6 +5,7 @@
 #### Common (required for both positions)
 -  Render TodoList: Do not use the index as the key of the item when render a list todo. Use todoId for key. 
 -  Reducer: store is Immutable . Do not modify store. Have to copy and reassign the store
+-  Type any for object Todo: define type for object todo help code easy write, read and maintenance. decrease bug
 #### Front-end engineer
 I add some features to the application:
 - User localStorage to save todos List. Hold todos list when reload page. Increase UX
@@ -28,6 +29,17 @@ I add some features to the application:
 - Feature auth
 - Can drag and drop todos
 - Add more information of todo such: date, todo title, todo content, categories...
+
+#### Test case:
+I not write unitTest for project. I will learn later and apply for project. But after build feature I write test case for this
+- Check interface 
+- Check add todo
+- Check edit todo
+- Check delete todo
+- Check update status
+- Check change language
+- Check delete all
+- Check update status all
 
 *Thank you so much and I hope receive feedback from company*
 ## Welcome to Manabie coding challenge
