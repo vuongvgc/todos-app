@@ -19,7 +19,8 @@
   "scripts": {
     "start:fullstack": "cross-env REACT_APP_WHOAMI=fullstack react-scripts start",
     "start:frontend": "cross-env REACT_APP_WHOAMI=frontend react-scripts start",
-    "build": "cross-env REACT_APP_WHOAMI=frontend react-scripts build",
+    "start": "cross-env REACT_APP_WHOAMI=frontend react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
