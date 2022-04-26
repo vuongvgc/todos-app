@@ -150,7 +150,11 @@ const ToDoPage = () => {
           <div />
         )}
         <TodoTabs showing={showing} setShowing={setShowing} todos={todos} />
-        <button className="Action__btn" onClick={() => setIsVisible(true)}>
+        <button
+          className={`Action__btn ${todos.length === 0 && "disable-button"}`}
+          onClick={() => setIsVisible(true)}
+          disabled={todos.length === 0}
+        >
           {language.clearAll}
         </button>
       </div>

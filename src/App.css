@@ -161,3 +161,6 @@ input:focus {
 .Action__btn.active {
   color: red;
 }
+button.disable-button{
+  cursor: not-allowed;
+}
